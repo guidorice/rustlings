@@ -4,15 +4,23 @@
 fn main() {
     let vec0 = Vec::new();
 
-    let mut vec1 = fill_vec(vec0);
-
-    // Do not change the following line!
+    // 1. clone it strategy
+    let mut vec1 = fill_vec(vec0.clone());
     println!("{} has length {} content `{:?}`", "vec0", vec0.len(), vec0);
-
     vec1.push(88);
-
     println!("{} has length {} content `{:?}`", "vec1", vec1.len(), vec1);
 
+    // 2. make fill_vec borrow, then copy the data within fn
+    let mut vec3 = fill_vec_borrow_and_copy(&vec0);
+    vec3.push(99);
+    println!("{} has length {} content `{:?}`", "vec0", vec0.len(), vec0);
+    println!("{} has length {} content `{:?}`", "vec3", vec3.len(), vec3);
+
+    // 3. make fill_vec mutable borrow, and modify in place! (danger)
+    let mut vec4 = vec0.clone();
+    fill_vec_dangerous(&mut vec4);
+    println!("{} has length {} content `{:?}`", "vec0", vec0.len(), vec0);
+    println!("{} has length {} content `{:?}`", "vec4", vec4.len(), vec4);
 }
 
 fn fill_vec(vec: Vec<i32>) -> Vec<i32> {
@@ -25,12 +33,19 @@ fn fill_vec(vec: Vec<i32>) -> Vec<i32> {
     vec
 }
 
+fn fill_vec_borrow_and_copy(vec: &Vec<i32>) -> Vec<i32> {
+    let mut vec = vec.clone();
+    vec.push(22);
+    vec.push(44);
+    vec.push(66);
+    vec
+}
 
-
-
-
-
-
+fn fill_vec_dangerous(vec: &mut Vec<i32>) {
+    vec.push(7);
+    vec.push(8);
+    vec.push(9);
+}
 
 
 

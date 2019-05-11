@@ -8,7 +8,13 @@
 // the price of an order of apples given the order amount. No hints this time!
 
 // Put your function here!
-// fn ..... {
+
+const DEFAULT_PRICE: i32 = 2;
+const DISCOUNT_PRICE: i32 = 1;
+
+fn calculateprice(quant: i32) -> i32 {
+  if quant > 40 { DISCOUNT_PRICE * quant } else { DEFAULT_PRICE * quant }
+}
 
 // Don't modify this function!
 #[test]

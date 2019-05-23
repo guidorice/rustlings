@@ -1,16 +1,36 @@
 // iterators4.rs
 
+
+// Complete this function to return factorial of num
+// Do not use:
+// - return
+// For extra fun don't use:
+// - imperative style loops (for, while)
+// - additional variables
+// For the most fun don't use:
+// - recursion
+// Scroll down for hints.
+
 pub fn factorial(num: u64) -> u64 {
-    // Complete this function to return factorial of num
-    // Do not use:
-    // - return
-    // For extra fun don't use:
-    // - imperative style loops (for, while)
-    // - additional variables
-    // For the most fun don't use:
-    // - recursion
-    // Scroll down for hints.
+    match num {
+      n if n <= 1 => 1,
+      n => n * factorial(n - 1)
+    }
 }
+
+/*
+here is an (outdated) non-recursive solution using iterators
+https://www.cs.brandeis.edu/~cs146a/rust/doc-02-21-2015/nightly/std/iter/trait.MultiplicativeIterator.html
+
+use std::iter::{count, MultiplicativeIterator};
+
+fn factorial(n: usize) -> usize {
+    count(1, 1).take_while(|&i| i <= n).product()
+}
+
+TODO: find out where count and MultiplicativeIterator currently reside in the 
+std library.
+*/
 
 #[cfg(test)]
 mod tests {
